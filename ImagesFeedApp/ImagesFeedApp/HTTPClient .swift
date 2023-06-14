@@ -31,7 +31,6 @@ final class HTTPClient: HTTPClientProtocol {
             }
 
             do {
-//                print(String(data: data, encoding: .utf8))
                 let decoder = JSONDecoder()
                 decoder.dateDecodingStrategy = .iso8601
                 decoder.keyDecodingStrategy = .convertFromSnakeCase
@@ -43,4 +42,3 @@ final class HTTPClient: HTTPClientProtocol {
         }.resume()
     }
 }
-

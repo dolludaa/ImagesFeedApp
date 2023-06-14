@@ -14,12 +14,19 @@ final class FavoritesViewController: UIViewController {
     private let searchBar = UISearchBar()
     private let imagesService = ImagesLoaderService()
     private var photos: [ImagesScreenModel] = []
+    private let localStorage = LocalStorage()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpLayout()
         setUpStyle()
-        loadData()
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        localStorage.update()
+        photos = localStorage.getSavedPhotos()
+        tableView.reloadData()
     }
 
     private func setUpLayout() {
@@ -38,8 +45,8 @@ final class FavoritesViewController: UIViewController {
     private func setUpStyle() {
         view.backgroundColor = .white
 
-        title = " Favorite Images"
-        tableView.rowHeight = 450
+        title = "Favorite Images"
+        tableView.rowHeight = 100
         tableView.sectionHeaderTopPadding = 0
         tableView.delegate = self
         tableView.dataSource = self
@@ -51,16 +58,10 @@ final class FavoritesViewController: UIViewController {
         tableView.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 30, right: 0)
     }
 
-    private func loadData() {
-        imagesService.fetchImages { [weak self] result in
-            switch result {
-            case .success(let photos):
-                self?.photos = photos
-                self?.tableView.reloadData()
-            case .failure(let error):
-                print("Error: \(error)")
-            }
-        }
+    private func didLikeOrDislike(indexPath: IndexPath) {
+        let photoModel = photos[indexPath.row]
+        localStorage.toggle(photoItem: photoModel)
+        tableView.reloadRows(at: [indexPath], with: .automatic)
     }
 }
 
@@ -70,9 +71,17 @@ extension FavoritesViewController: UITableViewDataSource, UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: FavoriteImageCell.reuseIdentifier, for: indexPath) as! FavoriteImageCell
+        guard let cell = tableView.dequeueReusableCell(
+            withIdentifier: FavoriteImageCell.reuseIdentifier,
+            for: indexPath)
+                as? FavoriteImageCell else {
+            fatalError("The dequeued cell is not an instance of FavoriteImageCell.")
+        }
         let photoItem = photos[indexPath.row]
-        cell.configure(model: photoItem)
+        let isLiked = localStorage.isLiked(photoId: photoItem.id)
+        cell.configure(model: photoItem, isLiked: isLiked) { [weak self] in
+            self?.didLikeOrDislike(indexPath: indexPath)
+        }
         cell.selectionStyle = .none
         return cell
     }
@@ -81,7 +90,20 @@ extension FavoritesViewController: UITableViewDataSource, UITableViewDelegate {
         let selectedPhoto = photos[indexPath.row]
         let detailViewController = DetailViewController()
         detailViewController.photoID = selectedPhoto.id
-        navigationController?.pushViewController(detailViewController, animated: true)
-    }
 
+        let alert = UIAlertController(
+            title: "Navigate",
+            message: "Do you really want to go to the detail screen?",
+            preferredStyle: .alert)
+
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let navigateAction = UIAlertAction(title: "Navigate", style: .default) { [weak self] _ in
+            self?.navigationController?.pushViewController(detailViewController, animated: true)
+        }
+
+        alert.addAction(cancelAction)
+        alert.addAction(navigateAction)
+
+        self.present(alert, animated: true, completion: nil)
+    }
 }

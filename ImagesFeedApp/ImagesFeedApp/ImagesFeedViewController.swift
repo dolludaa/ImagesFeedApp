@@ -8,7 +8,6 @@
 import UIKit
 import Foundation
 
-
 class ImagesFeedViewController: UIViewController {
 
     private let tableView = UITableView()
@@ -17,13 +16,18 @@ class ImagesFeedViewController: UIViewController {
     private let imagesService = ImagesLoaderService()
     private let searchService = ImagesSearchService()
     private var photos: [ImagesScreenModel] = []
-//    private var searchPhoto: [UnsplashPhoto] = []
+    private let localStorage = LocalStorage()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpLayout()
         setUpStyle()
         loadData()
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        localStorage.update()
     }
 
     private func setUpLayout() {
@@ -69,6 +73,12 @@ class ImagesFeedViewController: UIViewController {
             }
         }
     }
+
+    private func didLikeOrDislike(indexPath: IndexPath) {
+        let photoModel = photos[indexPath.row]
+        localStorage.toggle(photoItem: photoModel)
+        tableView.reloadRows(at: [indexPath], with: .automatic)
+    }
 }
 
 extension ImagesFeedViewController: UITableViewDataSource, UITableViewDelegate {
@@ -77,9 +87,17 @@ extension ImagesFeedViewController: UITableViewDataSource, UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: ImageInfoCell.reuseIdentifier, for: indexPath) as! ImageInfoCell
+        guard let cell = tableView.dequeueReusableCell(
+            withIdentifier: ImageInfoCell.reuseIdentifier,
+            for: indexPath) as? ImageInfoCell
+        else {
+            fatalError("The dequeued cell is not an instance of FavoriteImageCell.")
+        }
         let photoItem = photos[indexPath.row]
-        cell.configure(model: photoItem)
+        let isLiked = localStorage.isLiked(photoId: photoItem.id)
+        cell.configure(model: photoItem, isLiked: isLiked) { [weak self] in
+            self?.didLikeOrDislike(indexPath: indexPath)
+        }
         cell.selectionStyle = .none
         return cell
     }
@@ -88,15 +106,26 @@ extension ImagesFeedViewController: UITableViewDataSource, UITableViewDelegate {
         let selectedPhoto = photos[indexPath.row]
         let detailViewController = DetailViewController()
         detailViewController.photoID = selectedPhoto.id
-        navigationController?.pushViewController(detailViewController, animated: true)
-    }
 
+        let alert = UIAlertController(
+            title: "Navigate",
+            message: "Do you really want to go to the detail screen?",
+            preferredStyle: .alert)
+
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let navigateAction = UIAlertAction(title: "Navigate", style: .default) { [weak self] _ in
+            self?.navigationController?.pushViewController(detailViewController, animated: true)
+        }
+
+        alert.addAction(cancelAction)
+        alert.addAction(navigateAction)
+
+        self.present(alert, animated: true, completion: nil)
+    }
 }
 
 extension ImagesFeedViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        print(searchText)
-        
         timer?.invalidate()
         timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { [weak self] (_) in
             if searchBar.text?.isEmpty == true {
@@ -116,4 +145,3 @@ extension ImagesFeedViewController: UISearchBarDelegate {
         })
     }
 }
-

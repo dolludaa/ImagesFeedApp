@@ -11,6 +11,7 @@ struct ImagesScreenModel: Codable {
     let id: String
     let likedByUser: Bool
     let urls: ImageUrls
+    let user: UserInfo
 }
 
 struct ImageUrls: Codable {
@@ -20,7 +21,6 @@ struct ImageUrls: Codable {
     let small: String
     let thumb: String
 }
-
 
 struct DetailImageModel: Codable {
     let id: String
@@ -45,8 +45,7 @@ struct SearchResults: Decodable {
 struct UnsplashPhoto: Decodable {
     let width: Int
     let height: Int
-    let urls: [URLKing.RawValue:String]
-
+    let urls: [URLKing.RawValue: String]
 
     enum URLKing: String {
         case raw

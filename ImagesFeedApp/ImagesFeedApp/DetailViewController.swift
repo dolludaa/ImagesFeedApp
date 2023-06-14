@@ -58,10 +58,9 @@ final class DetailViewController: UIViewController {
 
             downloadsCount.topAnchor.constraint(equalTo: location.bottomAnchor, constant: 10),
             downloadsCount.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            downloadsCount.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            downloadsCount.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
         ])
     }
-
 
     private func setUpStyle() {
         view.backgroundColor = .white
@@ -128,5 +127,3 @@ final class DetailViewController: UIViewController {
         }
     }
 }
-
-

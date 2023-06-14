@@ -16,6 +16,7 @@ final class ImageInfoCell: UITableViewCell {
     private let likeQuestion = UILabel()
     private let imageService = ImagesLoaderService()
     private var photoID: String?
+    private var onDidLike = {}
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -39,9 +40,9 @@ final class ImageInfoCell: UITableViewCell {
 
         NSLayoutConstraint.activate([
             photoImage.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 15),
-                photoImage.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 15),
-                photoImage.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20),
-                photoImage.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -15),
+            photoImage.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 15),
+            photoImage.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20),
+            photoImage.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -15),
 
             likeButton.topAnchor.constraint(equalTo: photoImage.bottomAnchor, constant: -10),
             likeButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -15),
@@ -71,7 +72,13 @@ final class ImageInfoCell: UITableViewCell {
         likeButton.addTarget(self, action: #selector(likeButtonTapped), for: .touchUpInside)
     }
 
-    func configure(model: ImagesScreenModel) {
+    func configure(model: ImagesScreenModel, isLiked: Bool, onDidLike: @escaping () -> Void ) {
+        if isLiked {
+            likeButton.setImage(UIImage(systemName: "heart.fill")?.withTintColor(.red), for: .normal)
+        } else {
+            likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
+        }
+        self.onDidLike = onDidLike
         photoID = model.id
         guard let url = URL(string: model.urls.regular) else { return }
         photoImage.loadImage(from: url) { [weak self] image in
@@ -80,29 +87,6 @@ final class ImageInfoCell: UITableViewCell {
     }
 
     @objc private func likeButtonTapped() {
-        guard let photoID = photoID else { return }
-        likeButton.isSelected = !likeButton.isSelected
-
-        if likeButton.isSelected {
-            likeButton.setImage(UIImage(systemName: "heart.fill")?.withTintColor(.red), for: .normal)
-            imageService.likePhoto(photoID: photoID) { result in
-                switch result {
-                case .success:
-                    print("Photo liked successfully")
-                case .failure(let error):
-                    print("Failed to like photo: \(error)")
-                }
-            }
-        } else {
-            likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
-            imageService.unlikePhoto(photoID: photoID) { result in
-                switch result {
-                case .success:
-                    print("Photo unliked successfully")
-                case .failure(let error):
-                    print("Failed to unlike photo: \(error)")
-                }
-            }
-        }
+        onDidLike()
     }
 }
