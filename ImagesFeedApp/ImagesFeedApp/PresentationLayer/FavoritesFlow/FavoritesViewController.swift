@@ -88,7 +88,7 @@ extension FavoritesViewController: UITableViewDataSource, UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedPhoto = photos[indexPath.row]
-        let detailViewController = DetailViewController()
+        let detailViewController = DetailViewControllerAssembly().create(imageService: imagesService)
         detailViewController.photoID = selectedPhoto.id
 
         let alert = UIAlertController(

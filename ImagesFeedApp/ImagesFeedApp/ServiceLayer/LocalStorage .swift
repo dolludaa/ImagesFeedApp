@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class LocalStorage {
+final class LocalStorage: LocalStorageProtocol {
 
     private let userDefaults = UserDefaults.standard
     private let photosKey = "BookmarkPhoto"
