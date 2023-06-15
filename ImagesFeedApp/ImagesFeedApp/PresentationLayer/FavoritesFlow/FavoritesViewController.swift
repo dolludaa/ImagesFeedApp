@@ -31,6 +31,15 @@ final class FavoritesViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
 
+    override func loadView() {
+        view = detailView
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        detailView.didLoad()
+    }
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         localStorage.update()

@@ -61,4 +61,9 @@ extension FavoritesView: FavoritesViewProtocol {
     func reloadRows(at indexPaths: [IndexPath]) {
         tableView.reloadRows(at: indexPaths, with: .automatic)
     }
+
+    func didLoad() {
+        setUpLayout()
+        setUpStyle()
+    }
 }

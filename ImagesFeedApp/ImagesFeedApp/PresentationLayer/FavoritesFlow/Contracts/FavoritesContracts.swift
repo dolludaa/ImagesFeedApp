@@ -11,6 +11,7 @@ import UIKit
 protocol FavoritesViewProtocol: UIView {
     func reloadData()
     func reloadRows(at indexPaths: [IndexPath])
+    func didLoad()
 }
 
 protocol FavoritesViewControllerDelegate: AnyObject, UITableViewDelegate, UITableViewDataSource {

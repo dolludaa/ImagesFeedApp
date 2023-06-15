@@ -41,6 +41,7 @@ class ImagesFeedViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         imageFeedView.didLoad()
+        loadData()
     }
 
     override func viewDidAppear(_ animated: Bool) {
