@@ -7,10 +7,6 @@
 
 import Foundation
 
-protocol ImagesLoaderServiceProtocol {
-    func fetchImages(completion: @escaping (Result<[ImagesScreenModel], Error>) -> Void)
-}
-
 final class ImagesLoaderService: ImagesLoaderServiceProtocol {
 
     private let client: HTTPClientProtocol

@@ -10,19 +10,37 @@ import Foundation
 
 class ImagesFeedViewController: UIViewController {
 
-    private let tableView = UITableView()
-    private let searchBar = UISearchBar()
+    private let localStorage: LocalStorageProtocol
+    private let imageFeedView: ImageFeedViewProtocol
+    private let imagesService: ImagesLoaderServiceProtocol
+    private let searchService: ImagesSearchServiceProtocol
+
     private var timer: Timer?
-    private let imagesService = ImagesLoaderService()
-    private let searchService = ImagesSearchService()
     private var photos: [ImagesScreenModel] = []
-    private let localStorage = LocalStorage()
+
+    init(
+        localStorage: LocalStorageProtocol,
+        imageFeedView: ImageFeedViewProtocol,
+        imagesService: ImagesLoaderServiceProtocol,
+        searchService: ImagesSearchServiceProtocol) {
+            self.localStorage = localStorage
+            self.imageFeedView = imageFeedView
+            self.imagesService = imagesService
+            self.searchService = searchService
+            super.init(nibName: nil, bundle: nil)
+        }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    override func loadView() {
+        view = imageFeedView
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setUpLayout()
-        setUpStyle()
-        loadData()
+        imageFeedView.didLoad()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -30,44 +48,12 @@ class ImagesFeedViewController: UIViewController {
         localStorage.update()
     }
 
-    private func setUpLayout() {
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-
-        view.addSubview(tableView)
-
-        NSLayoutConstraint.activate([
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 12),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -12),
-            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 12)
-        ])
-    }
-
-    private func setUpStyle() {
-        view.backgroundColor = .white
-
-        title = "Images"
-        tableView.rowHeight = 400
-        tableView.sectionHeaderTopPadding = 0
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.register(ImageInfoCell.self, forCellReuseIdentifier: ImageInfoCell.reuseIdentifier)
-        tableView.layer.cornerRadius = 9
-        tableView.tableHeaderView = searchBar
-        tableView.separatorStyle = .singleLine
-        tableView.separatorColor = .clear
-        tableView.separatorInset = UIEdgeInsets(top: 100, left: 0, bottom: 100, right: 0)
-
-        searchBar.sizeToFit()
-        searchBar.delegate = self
-    }
-
     private func loadData() {
         imagesService.fetchImages { [weak self] result in
             switch result {
             case .success(let photos):
                 self?.photos = photos
-                self?.tableView.reloadData()
+                self?.imageFeedView.reloadTableContent()
             case .failure(let error):
                 print("Error: \(error)")
             }
@@ -77,7 +63,7 @@ class ImagesFeedViewController: UIViewController {
     private func didLikeOrDislike(indexPath: IndexPath) {
         let photoModel = photos[indexPath.row]
         localStorage.toggle(photoItem: photoModel)
-        tableView.reloadRows(at: [indexPath], with: .automatic)
+        imageFeedView.reloadRows(indexPath: indexPath)
     }
 }
 
@@ -104,8 +90,10 @@ extension ImagesFeedViewController: UITableViewDataSource, UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedPhoto = photos[indexPath.row]
-        let detailViewController = DetailViewController()
-        detailViewController.photoID = selectedPhoto.id
+        let detailViewController = DetailViewControllerAssembly().create(
+            photoID: selectedPhoto.id,
+            imageService: imagesService
+        )
 
         let alert = UIAlertController(
             title: "Navigate",
@@ -135,7 +123,7 @@ extension ImagesFeedViewController: UISearchBarDelegate {
                     switch result {
                     case .success(let photos):
                         self?.photos = photos.results
-                        self?.tableView.reloadData()
+                        self?.imageFeedView.reloadTableContent()
                     case .failure(let error):
                         print("Error: \(error)")
                     }
@@ -145,3 +133,5 @@ extension ImagesFeedViewController: UISearchBarDelegate {
         })
     }
 }
+
+extension ImagesFeedViewController: ImagesFeedViewControllerDelegate {}

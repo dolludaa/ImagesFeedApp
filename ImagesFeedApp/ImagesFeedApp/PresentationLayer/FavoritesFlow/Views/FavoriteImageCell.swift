@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-final class FavoriteImageCell: UITableViewCell {
+final class FavoriteImageCell: UITableViewCell, FavoriteImageCellProtocol {
     static let reuseIdentifier = String(describing: FavoriteImageCell.self)
 
     private let likeButton = UIButton()

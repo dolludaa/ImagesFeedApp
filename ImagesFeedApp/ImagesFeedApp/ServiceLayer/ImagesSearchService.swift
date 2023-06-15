@@ -7,7 +7,7 @@
 
 import Foundation
 
-class ImagesSearchService {
+class ImagesSearchService: ImagesSearchServiceProtocol {
     private let client: HTTPClientProtocol
 
     init(client: HTTPClientProtocol = HTTPClient()) {

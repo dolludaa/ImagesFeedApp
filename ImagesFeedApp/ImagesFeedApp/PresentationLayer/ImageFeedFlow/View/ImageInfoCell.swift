@@ -8,18 +8,20 @@
 import Foundation
 import UIKit
 
-final class ImageInfoCell: UITableViewCell {
+final class ImageInfoCell: UITableViewCell, ImageInfoCellProtocol {
     static let reuseIdentifier = String(describing: ImageInfoCell.self)
+
+    var imageService: ImagesLoaderServiceProtocol?
 
     private let likeButton = UIButton()
     private let photoImage = UIImageView()
     private let likeQuestion = UILabel()
-    private let imageService = ImagesLoaderService()
     private var photoID: String?
     private var onDidLike = {}
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+
         setupLayout()
         setUpStyle()
         setUp()

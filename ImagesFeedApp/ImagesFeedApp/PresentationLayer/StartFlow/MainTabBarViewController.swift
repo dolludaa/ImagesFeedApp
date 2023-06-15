@@ -12,19 +12,18 @@ final class MainTabBarViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         generateTabBar()
-        setTabBarTintColor()
         addSeparatorLine()
     }
 
     private func generateTabBar() {
         viewControllers = [
             generateNavigationVC(
-                viewController: ImagesFeedViewController(),
+                viewController: ImagesFeedViewControllerAssembly().create(),
                 title: "Images",
                 imageName: "photo.stack"
             ),
             generateNavigationVC(
-                viewController: FavoritesViewController(),
+                viewController: FavoritesViewControllerAssembly().create(),
                 title: "Favorites",
                 imageName: "star"
             )
@@ -39,12 +38,6 @@ final class MainTabBarViewController: UITabBarController {
         navigationVC.tabBarItem.title = title
         navigationVC.tabBarItem.image = UIImage(systemName: imageName)
         return navigationVC
-    }
-
-    private func setTabBarTintColor() {
-//        tabBar.tintColor = AppColor.primaryGreenColor.color
-//        tabBar.backgroundColor = AppColor.primaryDarkGrayColor.color
-//        tabBar.unselectedItemTintColor = UIColor.darkGray
     }
 
     private func addSeparatorLine() {

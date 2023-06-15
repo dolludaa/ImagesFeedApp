@@ -21,3 +21,12 @@ protocol ImagesLoaderServiceProtocol {
     func fetchImages(completion: @escaping (Result<[ImagesScreenModel], Error>) -> Void)
     func fetchInfo(photoID: String, completion: @escaping (Result<DetailImageModel, Error>) -> Void)
 }
+
+protocol LocalStorageProtocol {
+    func unlikePhoto(photoItem: ImagesScreenModel)
+    func likePhoto(photoItem: ImagesScreenModel)
+    func isLiked(photoId: String) -> Bool
+    func toggle(photoItem: ImagesScreenModel)
+    func getSavedPhotos() -> [ImagesScreenModel]
+    func update()
+}

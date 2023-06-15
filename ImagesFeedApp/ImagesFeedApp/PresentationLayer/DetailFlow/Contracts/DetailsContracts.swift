@@ -6,3 +6,13 @@
 //
 
 import Foundation
+import UIKit
+
+protocol DetailViewProtocol: UIView {
+    func configure(model: DetailImageModel)
+    func didLoad()
+}
+
+protocol DetailViewControllerDelegate: AnyObject {
+    func formatDate(_ dateString: String) -> String?
+}

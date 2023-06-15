@@ -7,11 +7,6 @@
 
 import Foundation
 
-protocol HTTPClientProtocol {
-    func fetchData<T>(for request: URLRequest, completion: @escaping (Result<T, Error>) -> Void) where T: Decodable
-
-}
-
 final class HTTPClient: HTTPClientProtocol {
     func fetchData<T>(for request: URLRequest, completion: @escaping (Result<T, Error>) -> Void) where T: Decodable {
         let completionOnMain = { result in

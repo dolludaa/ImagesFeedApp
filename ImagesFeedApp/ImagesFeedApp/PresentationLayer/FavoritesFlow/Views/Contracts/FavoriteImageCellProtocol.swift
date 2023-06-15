@@ -6,3 +6,8 @@
 //
 
 import Foundation
+import UIKit
+
+protocol FavoriteImageCellProtocol {
+    func configure(model: ImagesScreenModel, isLiked: Bool, onDidLike: @escaping () -> Void )
+}
