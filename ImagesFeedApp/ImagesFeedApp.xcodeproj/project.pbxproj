@@ -8,10 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		3FF4D4B8E4E3851F410A2068 /* Pods_ImagesFeedApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5D7D002791BD3ECA940976D /* Pods_ImagesFeedApp.framework */; };
+		4406320A2AA272EB00BAE766 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 440632092AA272EB00BAE766 /* Kingfisher */; };
+		4406320C2AA2753C00BAE766 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4406320B2AA2753C00BAE766 /* UIColor.swift */; };
+		4406320E2AA2755D00BAE766 /* AppColorEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4406320D2AA2755D00BAE766 /* AppColorEnum.swift */; };
+		440632102AA407D200BAE766 /* Debouncer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4406320F2AA407D200BAE766 /* Debouncer.swift */; };
 		4485B9852A37D046000E0531 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4485B9842A37D046000E0531 /* AppDelegate.swift */; };
 		4485B9872A37D046000E0531 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4485B9862A37D046000E0531 /* SceneDelegate.swift */; };
 		4485B9892A37D046000E0531 /* ImagesFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4485B9882A37D046000E0531 /* ImagesFeedViewController.swift */; };
-		4485B98C2A37D046000E0531 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4485B98A2A37D046000E0531 /* Main.storyboard */; };
 		4485B98E2A37D048000E0531 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4485B98D2A37D048000E0531 /* Assets.xcassets */; };
 		4485B9912A37D048000E0531 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4485B98F2A37D048000E0531 /* LaunchScreen.storyboard */; };
 		4485B9992A37D328000E0531 /* MainTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4485B9982A37D328000E0531 /* MainTabBarViewController.swift */; };
@@ -44,11 +47,13 @@
 
 /* Begin PBXFileReference section */
 		42E503457F751A3E2611C0AE /* Pods-ImagesFeedApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ImagesFeedApp.debug.xcconfig"; path = "Target Support Files/Pods-ImagesFeedApp/Pods-ImagesFeedApp.debug.xcconfig"; sourceTree = "<group>"; };
+		4406320B2AA2753C00BAE766 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
+		4406320D2AA2755D00BAE766 /* AppColorEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppColorEnum.swift; sourceTree = "<group>"; };
+		4406320F2AA407D200BAE766 /* Debouncer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Debouncer.swift; sourceTree = "<group>"; };
 		4485B9812A37D046000E0531 /* ImagesFeedApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImagesFeedApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4485B9842A37D046000E0531 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4485B9862A37D046000E0531 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		4485B9882A37D046000E0531 /* ImagesFeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesFeedViewController.swift; sourceTree = "<group>"; };
-		4485B98B2A37D046000E0531 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4485B98D2A37D048000E0531 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4485B9902A37D048000E0531 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4485B9922A37D048000E0531 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -87,6 +92,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4406320A2AA272EB00BAE766 /* Kingfisher in Frameworks */,
 				3FF4D4B8E4E3851F410A2068 /* Pods_ImagesFeedApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -121,7 +127,6 @@
 				4485B9A22A391F80000E0531 /* Extensions */,
 				4485B9842A37D046000E0531 /* AppDelegate.swift */,
 				4485B9862A37D046000E0531 /* SceneDelegate.swift */,
-				4485B98A2A37D046000E0531 /* Main.storyboard */,
 				4485B98D2A37D048000E0531 /* Assets.xcassets */,
 				4485B98F2A37D048000E0531 /* LaunchScreen.storyboard */,
 				4485B9922A37D048000E0531 /* Info.plist */,
@@ -133,6 +138,7 @@
 			isa = PBXGroup;
 			children = (
 				4485B9A32A391F8C000E0531 /* UIImageView.swift */,
+				4406320B2AA2753C00BAE766 /* UIColor.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -142,6 +148,7 @@
 			children = (
 				4485B9B82A3A6387000E0531 /* Models */,
 				4485B9B02A3A3366000E0531 /* AppConstants.swift */,
+				4406320D2AA2755D00BAE766 /* AppColorEnum.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -154,6 +161,7 @@
 				4485B99A2A37D818000E0531 /* ImagesLoaderService.swift */,
 				4485B99C2A37D8F9000E0531 /* HTTPClient .swift */,
 				4485B9B22A3A3E70000E0531 /* LocalStorage .swift */,
+				4406320F2AA407D200BAE766 /* Debouncer.swift */,
 			);
 			path = ServiceLayer;
 			sourceTree = "<group>";
@@ -323,6 +331,9 @@
 			dependencies = (
 			);
 			name = ImagesFeedApp;
+			packageProductDependencies = (
+				440632092AA272EB00BAE766 /* Kingfisher */,
+			);
 			productName = ImagesFeedApp;
 			productReference = 4485B9812A37D046000E0531 /* ImagesFeedApp.app */;
 			productType = "com.apple.product-type.application";
@@ -351,6 +362,9 @@
 				Base,
 			);
 			mainGroup = 4485B9782A37D046000E0531;
+			packageReferences = (
+				440632082AA272EB00BAE766 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+			);
 			productRefGroup = 4485B9822A37D046000E0531 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -367,7 +381,6 @@
 			files = (
 				4485B9912A37D048000E0531 /* LaunchScreen.storyboard in Resources */,
 				4485B98E2A37D048000E0531 /* Assets.xcassets in Resources */,
-				4485B98C2A37D046000E0531 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -422,6 +435,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4485B9892A37D046000E0531 /* ImagesFeedViewController.swift in Sources */,
+				440632102AA407D200BAE766 /* Debouncer.swift in Sources */,
 				4485B9A42A391F8C000E0531 /* UIImageView.swift in Sources */,
 				4485B99B2A37D818000E0531 /* ImagesLoaderService.swift in Sources */,
 				4485B9992A37D328000E0531 /* MainTabBarViewController.swift in Sources */,
@@ -440,6 +454,7 @@
 				4485B99F2A37DE74000E0531 /* ImagesScreenModel.swift in Sources */,
 				4485B9A12A38E5A4000E0531 /* ImageInfoCell.swift in Sources */,
 				4485B9B72A3A630C000E0531 /* Contracts.swift in Sources */,
+				4406320C2AA2753C00BAE766 /* UIColor.swift in Sources */,
 				4485B9DA2A3AF018000E0531 /* FavoriteImageCellProtocol.swift in Sources */,
 				4485B9A62A39204A000E0531 /* DetailViewController.swift in Sources */,
 				4485B9CE2A3A6B7D000E0531 /* DetailView.swift in Sources */,
@@ -449,6 +464,7 @@
 				4485B9D12A3AEF46000E0531 /* FavoritesView.swift in Sources */,
 				4485B9BA2A3A63D8000E0531 /* DetailImageModel.swift in Sources */,
 				4485B9C22A3A656B000E0531 /* ImageFeedView.swift in Sources */,
+				4406320E2AA2755D00BAE766 /* AppColorEnum.swift in Sources */,
 				4485B99D2A37D8F9000E0531 /* HTTPClient .swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -456,14 +472,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		4485B98A2A37D046000E0531 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				4485B98B2A37D046000E0531 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		4485B98F2A37D048000E0531 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -602,7 +610,6 @@
 				INFOPLIST_FILE = ImagesFeedApp/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
@@ -635,7 +642,6 @@
 				INFOPLIST_FILE = ImagesFeedApp/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
@@ -677,6 +683,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		440632082AA272EB00BAE766 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		440632092AA272EB00BAE766 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 440632082AA272EB00BAE766 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 4485B9792A37D046000E0531 /* Project object */;
 }

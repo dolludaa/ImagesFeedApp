@@ -9,17 +9,17 @@ import Foundation
 import UIKit
 
 protocol ImagesSearchServiceProtocol {
-    func request(searchTerm: String, completion: @escaping (Result<SearchResults, Error>) -> Void)
+  func request(searchTerm: String, completion: @escaping (Result<SearchResults, Error>) -> Void)
 }
 
 protocol HTTPClientProtocol {
-    func fetchData<T>(for request: URLRequest, completion: @escaping (Result<T, Error>) -> Void) where T: Decodable
+  func fetchData<T>(for request: URLRequest, completion: @escaping (Result<T, Error>) -> Void) where T: Decodable
 
 }
 
 protocol ImagesLoaderServiceProtocol {
-    func fetchImages(completion: @escaping (Result<[ImagesScreenModel], Error>) -> Void)
-    func fetchInfo(photoID: String, completion: @escaping (Result<DetailImageModel, Error>) -> Void)
+  func fetchImages(page: Int, completion: @escaping (Result<[ImagesScreenModel], Error>) -> Void)
+  func fetchInfo(photoID: String, completion: @escaping (Result<DetailImageModel, Error>) -> Void)
 }
 
 protocol LocalStorageProtocol {
@@ -29,4 +29,9 @@ protocol LocalStorageProtocol {
     func toggle(photoItem: ImagesScreenModel)
     func getSavedPhotos() -> [ImagesScreenModel]
     func update()
+}
+
+protocol DebouncerProtocol {
+  func debounce(action: @escaping () -> Void)
+  init(delay: TimeInterval)
 }

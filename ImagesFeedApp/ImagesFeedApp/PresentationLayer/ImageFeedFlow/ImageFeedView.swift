@@ -10,55 +10,53 @@ import UIKit
 
 final class ImageFeedView: UIView {
 
-    weak var delegate: ImagesFeedViewControllerDelegate?
+  weak var delegate: ImagesFeedViewControllerDelegate?
 
-    private let tableView = UITableView()
-    private let searchBar = UISearchBar()
+  lazy var collectionLayout = UICollectionViewFlowLayout()
+  lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionLayout)
 
-    private func setUpLayout() {
-        tableView.translatesAutoresizingMaskIntoConstraints = false
+  private func setUpLayout() {
+    collectionView.translatesAutoresizingMaskIntoConstraints = false
 
-        addSubview(tableView)
+    addSubview(collectionView)
 
-        NSLayoutConstraint.activate([
-            tableView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 12),
-            tableView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -12),
-            tableView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
-            tableView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 12)
-        ])
-    }
+    NSLayoutConstraint.activate([
+      collectionView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
+      collectionView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
+      collectionView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
+      collectionView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 12)
+    ])
+  }
 
-    private func setUpStyle() {
-        backgroundColor = .white
+  private func setUpStyle() {
+    backgroundColor = UIColor(named: "backgroundColor")
 
-        delegate?.title = "Images"
-        tableView.rowHeight = 400
-        tableView.sectionHeaderTopPadding = 0
-        tableView.delegate = delegate
-        tableView.dataSource = delegate
-        tableView.register(ImageInfoCell.self, forCellReuseIdentifier: ImageInfoCell.reuseIdentifier)
-        tableView.layer.cornerRadius = 9
-        tableView.tableHeaderView = searchBar
-        tableView.separatorStyle = .singleLine
-        tableView.separatorColor = .clear
-        tableView.separatorInset = UIEdgeInsets(top: 100, left: 0, bottom: 100, right: 0)
+    delegate?.title = "Images"
 
-        searchBar.sizeToFit()
-        searchBar.delegate = delegate
-    }
+    collectionView.delegate = delegate
+    collectionView.dataSource = delegate
+    collectionView.register(ImageInfoCell.self, forCellWithReuseIdentifier: ImageInfoCell.reuseIdentifier)
+    collectionView.backgroundColor = UIColor(named: "backgroundColor")
+
+    collectionView.layer.cornerRadius = 9
+    collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+    collectionLayout.minimumLineSpacing = 10
+    collectionLayout.minimumInteritemSpacing = 10
+
+  }
 }
 
 extension ImageFeedView: ImageFeedViewProtocol {
-    func reloadTableContent() {
-        tableView.reloadData()
-    }
+  func reloadTableContent() {
+    collectionView.reloadData()
+  }
 
-    func reloadRows(indexPath: IndexPath) {
-        tableView.reloadRows(at: [indexPath], with: .automatic)
-    }
+  func reloadRows(indexPath: IndexPath) {
+    collectionView.reloadItems(at: [indexPath])
+  }
 
-    func didLoad() {
-        setUpLayout()
-        setUpStyle()
-    }
+  func didLoad() {
+    setUpLayout()
+    setUpStyle()
+  }
 }

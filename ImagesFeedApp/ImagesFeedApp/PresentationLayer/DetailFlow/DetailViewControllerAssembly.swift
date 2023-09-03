@@ -9,19 +9,22 @@ import Foundation
 import UIKit
 
 struct DetailViewControllerAssembly {
-    func create(
-        photoID: String,
-        imageService: ImagesLoaderServiceProtocol
-    ) -> UIViewController {
-        let detailView = DetailView()
+  func create(
+    photoModel: ImagesScreenModel,
+    imageService: ImagesLoaderServiceProtocol,
+    localStorage: LocalStorageProtocol
+  ) -> UIViewController {
+    let detailView = DetailView()
 
-        let controller = DetailViewController(
-            photoID: photoID,
-            detailView: detailView,
-            imageService: imageService
-        )
-        detailView.delegate = controller
+    let controller = DetailViewController(
+      photoModel: photoModel,
+      detailView: detailView,
+      imageService: imageService,
+      localStorage: localStorage
 
-        return controller
-    }
+    )
+    detailView.delegate = controller
+
+    return controller
+  }
 }

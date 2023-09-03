@@ -7,4 +7,5 @@ target 'ImagesFeedApp' do
 
   # Pods for ImagesFeedApp
   pod 'SwiftLint' 
+pod 'Kingfisher'
 end

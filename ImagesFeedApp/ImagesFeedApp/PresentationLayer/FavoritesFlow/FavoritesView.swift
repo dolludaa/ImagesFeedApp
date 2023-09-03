@@ -38,18 +38,19 @@ final class FavoritesView: UIView {
     }
 
     private func setUpStyle() {
-        backgroundColor = .white
+      backgroundColor = UIColor(named: "backgroundColor")
 
-        delegate?.title = "Favorite Images"
-        tableView.rowHeight = 100
-        tableView.sectionHeaderTopPadding = 0
-        tableView.delegate = delegate
-        tableView.dataSource = delegate
-        tableView.register(FavoriteImageCell.self, forCellReuseIdentifier: FavoriteImageCell.reuseIdentifier)
-        tableView.layer.cornerRadius = 9
-        tableView.separatorStyle = .singleLine
-        tableView.separatorColor = .clear
-        tableView.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 30, right: 0)
+      delegate?.title = "Favorite Images"
+      tableView.rowHeight = 200
+      tableView.backgroundColor = UIColor(named: "backgroundColor")
+      tableView.sectionHeaderTopPadding = 0
+      tableView.delegate = delegate
+      tableView.dataSource = delegate
+      tableView.register(FavoriteImageCell.self, forCellReuseIdentifier: FavoriteImageCell.reuseIdentifier)
+      tableView.layer.cornerRadius = 9
+      tableView.separatorStyle = .singleLine
+      tableView.separatorColor = .clear
+      tableView.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 30, right: 0)
     }
 }
 

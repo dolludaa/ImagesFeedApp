@@ -8,6 +8,6 @@
 import Foundation
 import UIKit
 
-protocol ImageInfoCellProtocol: UITableViewCell {
-    func configure(model: ImagesScreenModel, isLiked: Bool, onDidLike: @escaping () -> Void )
+protocol ImageInfoCellProtocol: UICollectionViewCell {
+  func configure(model: ImagesScreenModel )
 }
