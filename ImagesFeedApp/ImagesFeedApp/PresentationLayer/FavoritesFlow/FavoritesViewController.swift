@@ -15,6 +15,7 @@ final class FavoritesViewController: UIViewController {
   private var photos: [ImagesScreenModel] = []
 
   private let detailView: FavoritesViewProtocol
+  private var isUpdating = false
 
   init(
     detailView: FavoritesViewProtocol,
@@ -38,19 +39,51 @@ final class FavoritesViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     detailView.didLoad()
+    addObservers()
+    updateLikesData()
   }
 
-  override func viewDidAppear(_ animated: Bool) {
-    super.viewDidAppear(animated)
+  private func didDislike(indexPath: IndexPath) {
+    isUpdating = true
+
+    let photoModel = photos.remove(at: indexPath.row)
+    localStorage.unlikePhoto(photoItem: photoModel)
+    detailView.deleteRows(at: [indexPath])
+
+    isUpdating = false
+  }
+
+  private func presentNavigationAlert(completion: @escaping () -> Void) {
+    let alert = UIAlertController(
+      title: "Navigate",
+      message: "Do you really want to go to the detail screen?",
+      preferredStyle: .alert)
+
+    let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+    let navigateAction = UIAlertAction(title: "Navigate", style: .default) { _ in
+      completion()
+    }
+
+    alert.addAction(cancelAction)
+    alert.addAction(navigateAction)
+
+    self.present(alert, animated: true, completion: nil)
+  }
+
+  private func addObservers() {
+    NotificationCenter.default.addObserver(
+      self,
+      selector: #selector(updateLikesData),
+      name: .didUpdateLikes,
+      object: nil)
+  }
+
+  @objc private func updateLikesData() {
+    guard !isUpdating else { return }
+
     localStorage.update()
     photos = localStorage.getSavedPhotos()
     detailView.reloadData()
-  }
-
-  private func didLikeOrDislike(indexPath: IndexPath) {
-    let photoModel = photos[indexPath.row]
-    localStorage.toggle(photoItem: photoModel)
-    detailView.reloadRows(at: [indexPath])
   }
 }
 
@@ -69,34 +102,23 @@ extension FavoritesViewController: UITableViewDataSource, UITableViewDelegate {
     let photoItem = photos[indexPath.row]
     let isLiked = localStorage.isLiked(photoId: photoItem.id)
     cell.configure(model: photoItem, isLiked: isLiked) { [weak self] in
-      self?.didLikeOrDislike(indexPath: indexPath)
+      self?.didDislike(indexPath: indexPath)
     }
     cell.selectionStyle = .none
     return cell
   }
 
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    let selectedPhoto = photos[indexPath.row]
-    let detailViewController = DetailViewControllerAssembly().create(
-      photoModel: selectedPhoto,
-      imageService: imagesService,
-      localStorage: LocalStorage()
-    )
-
-    let alert = UIAlertController(
-      title: "Navigate",
-      message: "Do you really want to go to the detail screen?",
-      preferredStyle: .alert)
-
-    let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-    let navigateAction = UIAlertAction(title: "Navigate", style: .default) { [weak self] _ in
-      self?.navigationController?.pushViewController(detailViewController, animated: true)
+    presentNavigationAlert { [weak self] in
+      guard let self else { return }
+      let selectedPhoto = self.photos[indexPath.row]
+      let detailViewController = DetailViewControllerAssembly().create(
+        photoModel: selectedPhoto,
+        imageService: self.imagesService,
+        localStorage: LocalStorage()
+      )
+      self.navigationController?.pushViewController(detailViewController, animated: true)
     }
-
-    alert.addAction(cancelAction)
-    alert.addAction(navigateAction)
-
-    self.present(alert, animated: true, completion: nil)
   }
 }
 

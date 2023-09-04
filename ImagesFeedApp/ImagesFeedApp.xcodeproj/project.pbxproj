@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		3FF4D4B8E4E3851F410A2068 /* Pods_ImagesFeedApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5D7D002791BD3ECA940976D /* Pods_ImagesFeedApp.framework */; };
 		4406320A2AA272EB00BAE766 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 440632092AA272EB00BAE766 /* Kingfisher */; };
-		4406320C2AA2753C00BAE766 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4406320B2AA2753C00BAE766 /* UIColor.swift */; };
-		4406320E2AA2755D00BAE766 /* AppColorEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4406320D2AA2755D00BAE766 /* AppColorEnum.swift */; };
 		440632102AA407D200BAE766 /* Debouncer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4406320F2AA407D200BAE766 /* Debouncer.swift */; };
 		4485B9852A37D046000E0531 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4485B9842A37D046000E0531 /* AppDelegate.swift */; };
 		4485B9872A37D046000E0531 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4485B9862A37D046000E0531 /* SceneDelegate.swift */; };
@@ -22,7 +20,6 @@
 		4485B99D2A37D8F9000E0531 /* HTTPClient .swift in Sources */ = {isa = PBXBuildFile; fileRef = 4485B99C2A37D8F9000E0531 /* HTTPClient .swift */; };
 		4485B99F2A37DE74000E0531 /* ImagesScreenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4485B99E2A37DE74000E0531 /* ImagesScreenModel.swift */; };
 		4485B9A12A38E5A4000E0531 /* ImageInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4485B9A02A38E5A4000E0531 /* ImageInfoCell.swift */; };
-		4485B9A42A391F8C000E0531 /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4485B9A32A391F8C000E0531 /* UIImageView.swift */; };
 		4485B9A62A39204A000E0531 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4485B9A52A39204A000E0531 /* DetailViewController.swift */; };
 		4485B9AA2A39FC99000E0531 /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4485B9A92A39FC99000E0531 /* FavoritesViewController.swift */; };
 		4485B9AC2A39FD89000E0531 /* FavoriteImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4485B9AB2A39FD89000E0531 /* FavoriteImageCell.swift */; };
@@ -47,8 +44,6 @@
 
 /* Begin PBXFileReference section */
 		42E503457F751A3E2611C0AE /* Pods-ImagesFeedApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ImagesFeedApp.debug.xcconfig"; path = "Target Support Files/Pods-ImagesFeedApp/Pods-ImagesFeedApp.debug.xcconfig"; sourceTree = "<group>"; };
-		4406320B2AA2753C00BAE766 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
-		4406320D2AA2755D00BAE766 /* AppColorEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppColorEnum.swift; sourceTree = "<group>"; };
 		4406320F2AA407D200BAE766 /* Debouncer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Debouncer.swift; sourceTree = "<group>"; };
 		4485B9812A37D046000E0531 /* ImagesFeedApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImagesFeedApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4485B9842A37D046000E0531 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -62,7 +57,6 @@
 		4485B99C2A37D8F9000E0531 /* HTTPClient .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HTTPClient .swift"; sourceTree = "<group>"; };
 		4485B99E2A37DE74000E0531 /* ImagesScreenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesScreenModel.swift; sourceTree = "<group>"; };
 		4485B9A02A38E5A4000E0531 /* ImageInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageInfoCell.swift; sourceTree = "<group>"; };
-		4485B9A32A391F8C000E0531 /* UIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
 		4485B9A52A39204A000E0531 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		4485B9A92A39FC99000E0531 /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
 		4485B9AB2A39FD89000E0531 /* FavoriteImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteImageCell.swift; sourceTree = "<group>"; };
@@ -124,7 +118,6 @@
 				4485B9BD2A3A6418000E0531 /* PresentationLayer */,
 				4485B9B52A3A62BD000E0531 /* ServiceLayer */,
 				4485B9AF2A3A334E000E0531 /* Entities */,
-				4485B9A22A391F80000E0531 /* Extensions */,
 				4485B9842A37D046000E0531 /* AppDelegate.swift */,
 				4485B9862A37D046000E0531 /* SceneDelegate.swift */,
 				4485B98D2A37D048000E0531 /* Assets.xcassets */,
@@ -134,21 +127,11 @@
 			path = ImagesFeedApp;
 			sourceTree = "<group>";
 		};
-		4485B9A22A391F80000E0531 /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				4485B9A32A391F8C000E0531 /* UIImageView.swift */,
-				4406320B2AA2753C00BAE766 /* UIColor.swift */,
-			);
-			path = Extensions;
-			sourceTree = "<group>";
-		};
 		4485B9AF2A3A334E000E0531 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
 				4485B9B82A3A6387000E0531 /* Models */,
 				4485B9B02A3A3366000E0531 /* AppConstants.swift */,
-				4406320D2AA2755D00BAE766 /* AppColorEnum.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -436,7 +419,6 @@
 			files = (
 				4485B9892A37D046000E0531 /* ImagesFeedViewController.swift in Sources */,
 				440632102AA407D200BAE766 /* Debouncer.swift in Sources */,
-				4485B9A42A391F8C000E0531 /* UIImageView.swift in Sources */,
 				4485B99B2A37D818000E0531 /* ImagesLoaderService.swift in Sources */,
 				4485B9992A37D328000E0531 /* MainTabBarViewController.swift in Sources */,
 				4485B9AA2A39FC99000E0531 /* FavoritesViewController.swift in Sources */,
@@ -454,7 +436,6 @@
 				4485B99F2A37DE74000E0531 /* ImagesScreenModel.swift in Sources */,
 				4485B9A12A38E5A4000E0531 /* ImageInfoCell.swift in Sources */,
 				4485B9B72A3A630C000E0531 /* Contracts.swift in Sources */,
-				4406320C2AA2753C00BAE766 /* UIColor.swift in Sources */,
 				4485B9DA2A3AF018000E0531 /* FavoriteImageCellProtocol.swift in Sources */,
 				4485B9A62A39204A000E0531 /* DetailViewController.swift in Sources */,
 				4485B9CE2A3A6B7D000E0531 /* DetailView.swift in Sources */,
@@ -464,7 +445,6 @@
 				4485B9D12A3AEF46000E0531 /* FavoritesView.swift in Sources */,
 				4485B9BA2A3A63D8000E0531 /* DetailImageModel.swift in Sources */,
 				4485B9C22A3A656B000E0531 /* ImageFeedView.swift in Sources */,
-				4406320E2AA2755D00BAE766 /* AppColorEnum.swift in Sources */,
 				4485B99D2A37D8F9000E0531 /* HTTPClient .swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

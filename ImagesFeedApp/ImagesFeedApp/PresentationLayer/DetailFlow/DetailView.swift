@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 
 final class DetailView: UIView {
+
   weak var delegate: DetailViewControllerDelegate?
 
   private let detailPhotoImage = UIImageView()
@@ -65,11 +66,11 @@ final class DetailView: UIView {
 
       likeButton.topAnchor.constraint(equalTo: downloadsCount.bottomAnchor, constant: 50),
       likeButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20)
-
     ])
   }
 
   private func setUpStyle() {
+
     backgroundColor = UIColor(named: "backgroundColor")
 
     detailPhotoImage.layer.cornerRadius = 30
@@ -96,13 +97,15 @@ final class DetailView: UIView {
     likeQuestion.text = "Add this photo to Favourites"
     likeQuestion.textColor = UIColor(named: "secondaryTextColor")
     likeQuestion.font = .boldSystemFont(ofSize: 15)
-
   }
 
   private func setUp() {
+
     likeButton.addTarget(self, action: #selector(likeButtonTapped), for: .touchUpInside)
   }
+
   @objc private func likeButtonTapped() {
+
     onDidLike()
   }
 }
@@ -117,16 +120,14 @@ extension DetailView: DetailViewProtocol {
       likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
     }
     self.onDidLike = onDidLike
-    
+
     let dateString = model.createdAt
 
     userName.text = "Author: \(model.user.name)"
     location.text = "Location: \(model.user.location ?? "Unknown location")"
     downloadsCount.text = "People downloaded it: \(String(model.downloads)) times"
     guard let url = URL(string: model.urls.regular) else { return }
-    detailPhotoImage.loadImage(from: url) { [weak self] image in
-      self?.detailPhotoImage.image = image
-    }
+    detailPhotoImage.kf.setImage(with: url)
 
     if let formattedDate = delegate?.formatDate(dateString) {
       creationDate.text = "Created at: \(formattedDate)".uppercased()

@@ -23,12 +23,12 @@ protocol ImagesLoaderServiceProtocol {
 }
 
 protocol LocalStorageProtocol {
-    func unlikePhoto(photoItem: ImagesScreenModel)
-    func likePhoto(photoItem: ImagesScreenModel)
-    func isLiked(photoId: String) -> Bool
-    func toggle(photoItem: ImagesScreenModel)
-    func getSavedPhotos() -> [ImagesScreenModel]
-    func update()
+  func unlikePhoto(photoItem: ImagesScreenModel)
+  func likePhoto(photoItem: ImagesScreenModel)
+  func isLiked(photoId: String) -> Bool
+  func toggle(photoItem: ImagesScreenModel)
+  func getSavedPhotos() -> [ImagesScreenModel]
+  func update()
 }
 
 protocol DebouncerProtocol {

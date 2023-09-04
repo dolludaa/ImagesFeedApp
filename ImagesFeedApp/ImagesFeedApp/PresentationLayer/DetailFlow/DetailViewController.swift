@@ -46,9 +46,13 @@ final class DetailViewController: UIViewController {
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
     localStorage.update()
+
+    guard let detailModel else { return }
+    configure(model: detailModel)
   }
 
   private func fetchPhotoDetails() {
+
     imageService.fetchInfo(photoID: photoModel.id) { [weak self] result in
       switch result {
       case .success(let photo):
@@ -61,12 +65,14 @@ final class DetailViewController: UIViewController {
   }
 
   private func didLikeOrDislike() {
+
     localStorage.toggle(photoItem: photoModel)
     guard let detailModel else { return }
     configure(model: detailModel)
   }
 
   private func configure(model: DetailImageModel) {
+
     let isLiked = localStorage.isLiked(photoId: photoModel.id)
 
     detailView.configure(model: model, isLiked: isLiked) { [weak self] in
@@ -77,7 +83,9 @@ final class DetailViewController: UIViewController {
 }
 
 extension DetailViewController: DetailViewControllerDelegate {
+
   func formatDate(_ dateString: String) -> String? {
+
     let dateFormatterInput = DateFormatter()
     dateFormatterInput.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
 

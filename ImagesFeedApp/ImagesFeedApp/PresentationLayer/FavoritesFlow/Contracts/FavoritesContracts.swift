@@ -9,11 +9,11 @@ import Foundation
 import UIKit
 
 protocol FavoritesViewProtocol: UIView {
-    func reloadData()
-    func reloadRows(at indexPaths: [IndexPath])
-    func didLoad()
+  func reloadData()
+  func deleteRows(at indexPaths: [IndexPath])
+  func didLoad()
 }
 
 protocol FavoritesViewControllerDelegate: AnyObject, UITableViewDelegate, UITableViewDataSource {
-    var title: String? { get set }
+  var title: String? { get set }
 }

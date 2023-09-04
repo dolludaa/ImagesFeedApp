@@ -13,9 +13,7 @@ final class ImageInfoCell: UICollectionViewCell, ImageInfoCellProtocol {
 
   static let reuseIdentifier = String(describing: ImageInfoCell.self)
 
-  var imageService: ImagesLoaderServiceProtocol?
-
-  let photoImage = UIImageView()
+  private let photoImage = UIImageView()
   private var photoID: String?
 
   override init(frame: CGRect) {
@@ -25,13 +23,13 @@ final class ImageInfoCell: UICollectionViewCell, ImageInfoCellProtocol {
     setUpStyle()
   }
 
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+
   override func prepareForReuse() {
     super.prepareForReuse()
     photoImage.image = nil
-  }
-
-  required init?(coder: NSCoder) {
-    fatalError("init(coder:) has not been implemented")
   }
 
   private func setupLayout() {
@@ -44,7 +42,6 @@ final class ImageInfoCell: UICollectionViewCell, ImageInfoCellProtocol {
       photoImage.topAnchor.constraint(equalTo: contentView.topAnchor),
       photoImage.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
       photoImage.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
-
     ])
   }
 

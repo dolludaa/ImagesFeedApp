@@ -9,12 +9,12 @@ import Foundation
 import UIKit
 
 final class FavoriteImageCell: UITableViewCell, FavoriteImageCellProtocol {
+
   static let reuseIdentifier = String(describing: FavoriteImageCell.self)
 
   private let likeButton = UIButton()
   private let photoImage = UIImageView()
   private var authorName = UILabel()
-  private let imageService = ImagesLoaderService()
   private var photoID: String?
   private var onDidLike = {}
 
@@ -47,7 +47,7 @@ final class FavoriteImageCell: UITableViewCell, FavoriteImageCellProtocol {
       photoImage.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
       photoImage.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 15),
       photoImage.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-      photoImage.widthAnchor.constraint(equalToConstant: 200),
+      photoImage.widthAnchor.constraint(equalToConstant: 150),
 
       authorName.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 15),
       authorName.leadingAnchor.constraint(equalTo: photoImage.trailingAnchor, constant: 15),
@@ -79,7 +79,7 @@ final class FavoriteImageCell: UITableViewCell, FavoriteImageCellProtocol {
     likeButton.addTarget(self, action: #selector(likeButtonTapped), for: .touchUpInside)
   }
 
-  func configure(model: ImagesScreenModel, isLiked: Bool, onDidLike: @escaping () -> Void ) {
+  func configure(model: ImagesScreenModel, isLiked: Bool, onDidLike: @escaping () -> Void) {
     if isLiked {
       likeButton.setImage(UIImage(systemName: "heart.fill")?.withTintColor(.red), for: .normal)
     } else {
@@ -89,9 +89,7 @@ final class FavoriteImageCell: UITableViewCell, FavoriteImageCellProtocol {
     photoID = model.id
     authorName.text = model.user.name
     guard let url = URL(string: model.urls.regular) else { return }
-    photoImage.loadImage(from: url) { [weak self] image in
-      self?.photoImage.image = image
-    }
+    photoImage.kf.setImage(with: url)
   }
 
   @objc private func likeButtonTapped() {

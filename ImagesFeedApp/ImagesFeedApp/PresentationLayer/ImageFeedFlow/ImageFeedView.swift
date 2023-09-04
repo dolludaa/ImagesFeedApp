@@ -36,8 +36,8 @@ final class ImageFeedView: UIView {
     collectionView.delegate = delegate
     collectionView.dataSource = delegate
     collectionView.register(ImageInfoCell.self, forCellWithReuseIdentifier: ImageInfoCell.reuseIdentifier)
-    collectionView.backgroundColor = UIColor(named: "backgroundColor")
 
+    collectionView.backgroundColor = UIColor(named: "backgroundColor")
     collectionView.layer.cornerRadius = 9
     collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     collectionLayout.minimumLineSpacing = 10
